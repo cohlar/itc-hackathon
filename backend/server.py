@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, jsonify
 from flask_cors import CORS
-from utils.utils import filter_server_log_messages
+from utils.server import filter_server_log_messages
 
 
 def create_app():

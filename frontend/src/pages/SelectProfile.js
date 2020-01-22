@@ -1,24 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import LargeIcon from '../components/LargeIcon';
 
 function SelectProfile() {
     return (
-        <>
+        <div className='flex-col container'>
             <NavLink to='/senior' className='select-profile-link'>
-                <img
-                    src={require('../img/senior.png')}
+                <LargeIcon
+                    src={require('../img/senior.jpg')}
                     alt='senior icon'
-                    className='select-profile-img'
                 />
             </NavLink>
             <NavLink to='/volunteer' className='select-profile-link'>
-                <img
-                    src={require('../img/volunteer.png')}
+                <LargeIcon
+                    src={require('../img/volunteer.jpg')}
                     alt='volunteer icon'
-                    className='select-profile-img'
                 />
             </NavLink>
-        </>
+        </div>
     );
 }
 

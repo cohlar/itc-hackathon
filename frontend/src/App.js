@@ -11,7 +11,7 @@ import VolunteerIndex from './pages/VolunteerIndex';
 import VolunteerAcceptedRequest from './pages/VolunteerAcceptedRequest'
 import AppContext from './context/AppContext';
 import { defaultLocation } from './config/demoConstants';
-import { get_requests } from './lib/api';
+import { getRequests } from './lib/api';
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState(defaultLocation);
@@ -21,10 +21,6 @@ function App() {
     currentLocation, setCurrentLocation,
     selectedRequest, setSelectedRequest,
   }
-
-  useEffect(() => {
-    get_requests(0.3, 0.3, 500);
-  }, [])
 
   return (
     <main className="App">

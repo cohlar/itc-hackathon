@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-export async function get_requests(lat, lon, up_to) {
+// amos http://192.168.0.20:5000/
+const baseUrl = 'http://127.0.0.1:5000/'
+
+export async function getRequests(lat, lon, up_to) {
+    const apiPath = '/api/get_requests'
     try {
-        const response = await axios.get('http://192.168.0.20:5000/api/get_requests/'
+        const response = await axios.get(
+                                    baseUrl
+                                    + apiPath + '/'
                                     + lat + '/'
                                     + lon + '/'
                                     + up_to);

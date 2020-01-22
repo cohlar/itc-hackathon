@@ -1,5 +1,4 @@
 import logging
-
 import mysql.connector
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -25,7 +24,6 @@ def get_requests(lat, lon, up_to):
     """Get requests near volunteer"""
     my_connector = DBConnector(sql["host"], sql["user"], sql["password"], sql["database"])
 
-    # distance is in m
     distance = f'(6371000 * acos(cos(radians({lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians({lon}))' \
                f' + sin(radians({lat}))* sin(radians(latitude))))'
     data = my_connector.select("seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_id, "

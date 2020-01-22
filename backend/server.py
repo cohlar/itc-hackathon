@@ -3,7 +3,6 @@ import logging
 import mysql.connector
 from flask import Flask, jsonify
 from flask_cors import CORS
-import utils.server
 from utils.server import filter_server_log_messages
 from utils.mysql_con import con_dict
 
@@ -20,17 +19,38 @@ filter_server_log_messages()
 
 @app.route('/api/users/<int:id>', methods=['GET'])
 def get_user(id):
-    user = {}
     mydb = mysql.connector.connect(host=con_dict['host'],
                                    user=con_dict['user'],
                                    password=con_dict['password'],
                                    database=con_dict['database'])
-
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM USER")
-    mycursor.fetchall()
+    data = mycursor.fetchall()
+    return jsonify(data)
 
-    return jsonify(user)
+
+@app.route()
+def add_request():
+    """"""
+    return jsonify()
+
+
+@app.route()
+def get_requests():
+    """"""
+    return jsonify()
+
+
+@app.route()
+def handdle():
+    """"""
+    return
+
+
+@app.route()
+def close():
+    """"""
+    return
 
 
 if __name__ == '__main__':

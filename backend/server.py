@@ -19,22 +19,11 @@ app = create_app()
 filter_server_log_messages()
 
 
-@app.route('/api/users/<int:id>', methods=['GET'])
-def get_user(id):
-    mydb = mysql.connector.connect(host=con_dict['host'],
-                                   user=con_dict['user'],
-                                   password=con_dict['password'],
-                                   database=con_dict['database'])
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM USER")
-    data = mycursor.fetchall()
-    return jsonify(data)
 
-
-@app.route('/api/get_requests/<float:lat>/<float:lon>/<float:up_to>', methods=['GET'])
+@app.route('/api/get_requests/<lat>/<lon>/<up_to>', methods=['GET'])
 def get_requests(lat, lon, up_to):
     """Get requests near volunteer"""
-    my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
+    my_connector = DBConnector(sql["host"], sql["user"], sql["password"], sql["database"])
 
     # distance is in m
     distance = f'(6371000 * acos(cos(radians({lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians({lon}))' \
@@ -47,4 +36,4 @@ def get_requests(lat, lon, up_to):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True, use_reloader=True, host='0.0.0.0')

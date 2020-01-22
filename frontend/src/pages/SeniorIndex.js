@@ -1,20 +1,13 @@
 import React from 'react';
 import RoundIcon from '../components/RoundIcon';
-
-const helpCategories = [
-    'bag-carrying',
-    'company',
-    'housekeeping',
-    'pet-care',
-    'technology',
-    'walking'
-]
+import { helpCategories } from '../config/demoConstants';
 
 function SeniorIndex() {
     return (
         <div className='flex-row container'>
             {helpCategories.map(cat =>
                 <RoundIcon
+                    key={cat}
                     src={require('../img/help-categories/' + cat + '.jpg')}
                     alt={cat}
                 />

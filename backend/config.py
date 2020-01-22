@@ -1,6 +1,7 @@
 tables = {
     "seniors": "CREATE TABLE seniors"
                "(id INT AUTO_INCREMENT PRIMARY KEY, "
+               "tel VARCHAR(255), "
                "name VARCHAR(255), "
                "birth_year INT(4))",
 

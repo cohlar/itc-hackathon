@@ -3,8 +3,10 @@ import logging
 import mysql.connector
 from flask import Flask, jsonify
 from flask_cors import CORS
+import utils.server
 from utils.server import filter_server_log_messages
 from utils.mysql_con import con_dict
+
 
 def create_app():
     app = Flask(__name__)

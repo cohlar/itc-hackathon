@@ -4,7 +4,7 @@ import mysql.connector
 from flask import Flask, jsonify
 from flask_cors import CORS
 from utils.server import filter_server_log_messages
-from utils.mysql_con import con_dict
+from utils.mysql_con import sql
 import json
 from utils.MYDBUtils import DBConnector, DBCreator
 
@@ -31,8 +31,7 @@ def get_user(id):
     return jsonify(data)
 
 
-sql = {'host': 'localhost', 'user': 'ITC', 'passwd': 'ITCITCITC', 'db': 'Limited_Helper'}
-@app.route('/api/get_requests/<float:lat, float:lon, float:up_to>', methods=['GET'])
+@app.route('/api/get_requests/<float:lat>/<float:lon>/<float:up_to>', methods=['GET'])
 def get_requests(lat, lon, up_to):
     """Get requests near volunteer"""
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])

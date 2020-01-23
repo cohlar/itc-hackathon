@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,11 +11,10 @@ import VolunteerIndex from './pages/VolunteerIndex';
 import VolunteerAcceptedRequest from './pages/VolunteerAcceptedRequest'
 import AppContext from './context/AppContext';
 import { defaultLocation } from './config/demoConstants';
-import { getRequests } from './lib/api';
 
 function App() {
   const [currentLocation, setCurrentLocation] = useState(defaultLocation);
-  const [selectedRequest, setSelectedRequest] = useState({});
+  const [selectedRequest, setSelectedRequest] = useState(null);
 
   const stateContext = {
     currentLocation, setCurrentLocation,

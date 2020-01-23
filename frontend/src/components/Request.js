@@ -5,26 +5,28 @@ function Request(props) {
 
     return (
         <div className='request-card container'>
-            <span>
-                {/* <img
-                    src={require('../img/profile-pictures/' + request.firstName + '.jpg')}
-                    alt={'Profile picture ' + request.firstName + ' ' + request.lastName}
-                    className='avatar'
-                /> */}
-                {request.firstName} {request.lastName} ({request.age} years old)
-            </span>
-            <span>
-                Type: {request.type}
-            </span>
-            <span>
-                Distance: {request.distance}
-            </span>
-            <span>
-                Walk time: {request.walkTime}
-            </span>
-            <span>
-                Phone number: {request.phoneNumber}
-            </span>
+            <img
+                src={require('../img/profile-pictures/' + request.name + '.jpg')}
+                alt={'Profile picture ' + request.name}
+                className='avatar'
+            />
+            <div className='request-details container'>
+                <b>
+                    {request.name}
+                </b>
+                <span>
+                    {request.age} years old
+                </span>
+                <span>
+                    Needs your help with {request.mis_name}
+                </span>
+                <span>
+                    Phone number: 7 min
+                </span>
+                <span>
+                    Phone number: {request.tel}
+                </span>
+            </div>
         </div>
     );
 }

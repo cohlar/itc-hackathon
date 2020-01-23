@@ -1,6 +1,7 @@
-import React from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React, { useContext } from 'react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import { apiKey } from '../config/googleApi';
+import AppContext from '../context/AppContext';
 
 const mapStyles = {
     width: '100%',
@@ -8,7 +9,9 @@ const mapStyles = {
 };
 
 function MapView(props) {
-    const { google, initialLocation } = props;
+    const { google, initialLocation, requests } = props;
+    const appContext = useContext(AppContext);
+    console.log(requests)
 
     return (
         <Map
@@ -19,7 +22,18 @@ function MapView(props) {
                 lat: initialLocation.lat,
                 lng: initialLocation.lng
             }}
-        />
+        >
+
+            {requests &&
+                requests.map(request =>
+                    <Marker
+                        onClick={() => appContext.setSelectedRequest(request)}
+                        position={{ lat: request.lat, lng: request.lon }}
+                        key={request.request_id}
+                    />
+                )}
+
+        </Map>
     );
 }
 

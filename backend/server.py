@@ -25,10 +25,10 @@ def add_request(senior_id, mission_name, lat, lon):
     return "ok"
 
 
-@app.route('/api/handle_request/<senior_id>', methods=['GET'])
-def handle_request(senior_id):
+@app.route('/api/handle_request/<request_id>', methods=['GET'])
+def handle_request(request_id):
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
-    my_connector.update("requests", "status", "1", "senior_id=" + str(senior_id))
+    my_connector.update("requests", "status", "1", "id=" + str(request_id))
     return "ok"
 
 
@@ -36,13 +36,13 @@ def handle_request(senior_id):
 def get_requests(lat, lon, up_to):
     """Get requests near volunteer"""
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
-    keys = ['name', 'tel', 'age', 'mis_name', 'lat', 'lon']
+    keys = ['request_id', 'name', 'tel', 'age', 'mis_name', 'lat', 'lon']
 
     # distance is in m
     distance = f'(6371000 * acos(cos(radians({lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians({lon}))' \
                f' + sin(radians({lat}))* sin(radians(latitude))))'
     data_list = my_connector.select(
-        "seniors.name, seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_name, "
+        "requests.id, seniors.name, seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_name, "
         "requests.latitude, requests.longitude", "requests, seniors",
         f'{distance} < {up_to} and requests.senior_id = seniors.id and status = 0')
     data_dicts = [dict(zip(keys, item)) for item in data_list]

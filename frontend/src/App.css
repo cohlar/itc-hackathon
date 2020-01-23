@@ -1,6 +1,8 @@
 .App {
   height: 94vh;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-col.container {
@@ -23,10 +25,19 @@
   align-content: space-around;
 }
 
+.request-card.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  margin: 20px 0;
+}
+
 main > div:not(.container) {
   width: 100%;
-  height: 50%;
+  height: 70%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -47,6 +58,13 @@ main > div:not(.container) > div {
   width: 130px;
   height: 130px;
   object-fit: contain;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,5 +1,4 @@
 import logging
-
 import mysql.connector
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -36,4 +35,4 @@ def get_requests(lat, lon, up_to):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True, use_reloader=True, host='0.0.0.0')

@@ -44,6 +44,20 @@ class DBConnector():
         self.mycursor.execute(sql)
         return self.mycursor.fetchall()
 
+    def update(self, table, column, value, where):
+        """
+        Update table "table": set column "column" to be of value "value" where "where".
+        :param table: the table to update.
+        :param columns: the column to update.
+        :param value: the new value.
+        :param where: the where clause.
+        :return: the numbers of records actually updated
+        """
+        sql = "UPDATE " + table + " SET " + column + "=" + value + " where " + where
+        self.mycursor.execute(sql)
+        self.mydb.commit()
+        return self.mycursor.rowcount
+
 
 class DBCreator():
 

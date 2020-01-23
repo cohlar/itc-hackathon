@@ -9,12 +9,14 @@ function SelectProfile() {
                 <LargeIcon
                     src={require('../img/senior.jpg')}
                     alt='senior icon'
+                    title='Senior'
                 />
             </NavLink>
             <NavLink to='/volunteer' className='select-profile-link'>
                 <LargeIcon
                     src={require('../img/volunteer.jpg')}
                     alt='volunteer icon'
+                    title='Volunteer'
                 />
             </NavLink>
         </div>

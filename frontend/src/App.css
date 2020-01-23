@@ -47,6 +47,12 @@ main > div:not(.container) > div {
 
 .select-profile-link {
   width: 70%;
+  text-decoration: none;
+}
+
+.select-profile-link > h1 {
+  color: black;
+  text-align: center;
 }
 
 .select-profile-img {
@@ -58,6 +64,8 @@ main > div:not(.container) > div {
   width: 130px;
   height: 130px;
   object-fit: contain;
+  border: 1px solid gray;
+  border-radius: 50%;
 }
 
 .avatar {

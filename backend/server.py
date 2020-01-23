@@ -22,14 +22,34 @@ def add_request(senior_id, mission_name, lat, lon):
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
     my_connector.insert("requests", "senior_id, mission_name, status, latitude, longitude",
                         [[senior_id, mission_name, 0, lat, lon]])
-    return "ok"
+
+    data_list = my_connector.select("max(id)", "requests")
+    return json.dumps({"id": data_list[0][0]})
 
 
-@app.route('/api/handle_request/<request_id>', methods=['GET'])
-def handle_request(request_id):
+@app.route('/api/handle_request/<request_id>/<volunteer_id>', methods=['GET'])
+def handle_request(request_id, volunteer_id):
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
     my_connector.update("requests", "status", "1", "id=" + str(request_id))
+    my_connector.update("requests", "volunteer_id", volunteer_id, "id=" + str(request_id))
     return "ok"
+
+
+@app.route('/api/get_status_and_volunteer/<request_id>', methods=['GET'])
+def get_status_and_volunteer(request_id):
+    my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
+    keys = ['name', 'tel', 'age', 'mis_name', 'status']
+
+    data_list = my_connector.select(
+        "seniors.name, seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_name, "
+        "requests.status", "requests, seniors",
+        f'requests.id={request_id} and requests.volunteer_id = seniors.id')
+
+    data_dicts = [dict(zip(keys, item)) for item in data_list]
+    if len(data_dicts) == 0:
+        return json.dumps({"status": 0})
+    else:
+        return json.dumps(data_dicts[0])
 
 
 @app.route('/api/get_requests/<lat>/<lon>/<up_to>', methods=['GET'])

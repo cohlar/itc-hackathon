@@ -19,31 +19,20 @@ app = create_app()
 filter_server_log_messages()
 
 
-@app.route('/api/users/<int:id>', methods=['GET'])
-def get_user(id):
-    mydb = mysql.connector.connect(host=con_dict['host'],
-                                   user=con_dict['user'],
-                                   password=con_dict['password'],
-                                   database=con_dict['database'])
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM USER")
-    data = mycursor.fetchall()
-    return jsonify(data)
-
-
-@app.route('/api/get_requests/<float:lat>/<float:lon>/<float:up_to>', methods=['GET'])
+@app.route('/api/get_requests/<lat>/<lon>/<up_to>', methods=['GET'])
 def get_requests(lat, lon, up_to):
     """Get requests near volunteer"""
     my_connector = DBConnector(sql["host"], sql["user"], sql["passwd"], sql["db"])
+    keys = ['tel', 'age', 'mis_id', 'lat', 'lon']
 
     # distance is in m
     distance = f'(6371000 * acos(cos(radians({lat})) * cos(radians(latitude)) * cos(radians(longitude) - radians({lon}))' \
                f' + sin(radians({lat}))* sin(radians(latitude))))'
-    data = my_connector.select("seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_id, "
-                               "requests.latitude, requests.longitude", "requests, seniors",
-                               f'{distance} < {up_to} and requests.senior_id = seniors.id')
-    json_string = json.dumps(data)
-    return json_string
+    data_list = my_connector.select("seniors.tel, YEAR(CURDATE()) - seniors.birth_year, requests.mission_id, "
+                                    "requests.latitude, requests.longitude", "requests, seniors",
+                                    f'{distance} < {up_to} and requests.senior_id = seniors.id')
+    data_dicts = [dict(zip(keys, item)) for item in data_list]
+    return json.dumps(data_dicts)
 
 
 if __name__ == '__main__':

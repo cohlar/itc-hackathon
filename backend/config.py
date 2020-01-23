@@ -8,6 +8,7 @@ tables = {
     "requests": "CREATE TABLE requests"
                 "(id INT AUTO_INCREMENT PRIMARY KEY,"
                 "senior_id INT,"
+                "volunteer_id INT,"
                 "mission_name VARCHAR(255),"
                 "status INT,"
                 "request_time TIME,"

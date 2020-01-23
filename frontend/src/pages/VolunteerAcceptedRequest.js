@@ -11,7 +11,7 @@ function VolunteerAcceptedRequest() {
         <>
             <MapNavigation
                 orig={defaultLocation}
-                dest={{lat: 32.056531, lng: 34.767743}}
+                dest={{lat: appContext.selectedRequest.lat, lng: appContext.selectedRequest.lon}}
             />
             <Request request={appContext.selectedRequest} />
         </>

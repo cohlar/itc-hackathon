@@ -29,6 +29,7 @@ function MapView(props) {
                     <Marker
                         onClick={() => appContext.setSelectedRequest(request)}
                         position={{ lat: request.lat, lng: request.lon }}
+                        key={request.request_id}
                     />
                 )}
 

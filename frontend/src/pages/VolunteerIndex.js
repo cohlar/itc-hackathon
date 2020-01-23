@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import MapView from '../components/MapView';
 import Request from '../components/Request';
 import AppContext from '../context/AppContext';
-import { getRequests } from '../lib/api';
+import { getRequests, handleRequest } from '../lib/api';
 import { defaultLocation } from '../config/demoConstants';
 
 function VolunteerIndex() {
@@ -29,10 +29,16 @@ function VolunteerIndex() {
             {appContext.selectedRequest &&
                 <>
                     <Request request={appContext.selectedRequest} />
-                    <NavLink to='volunteer/accepted-request'>
-                        <button>
-                            Validate
-                        </button>
+                    <NavLink
+                        to='volunteer/accepted-request'
+                        className='validate-container'
+                        onClick={() => handleRequest(appContext.selectedRequest.request_id)}
+                    >
+                        <img
+                            src={require('../img/validate.gif')}
+                            alt='Validate'
+                            className='validate-img'
+                        />
                     </NavLink>
                 </>
             }

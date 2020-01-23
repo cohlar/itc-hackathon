@@ -8,6 +8,6 @@ export const helpCategories = [
     'company',
     'housekeeping',
     'pet-care',
-    'technology',
-    'walking'
+    'physical-assistance',
+    'technology'
 ]

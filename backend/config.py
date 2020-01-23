@@ -5,10 +5,6 @@ tables = {
                "name VARCHAR(255), "
                "birth_year INT(4))",
 
-    "missions": "CREATE TABLE missions"
-                "(id INT AUTO_INCREMENT PRIMARY KEY,"
-                "name VARCHAR(255))",
-
     "requests": "CREATE TABLE requests"
                 "(id INT AUTO_INCREMENT PRIMARY KEY,"
                 "senior_id INT,"

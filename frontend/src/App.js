@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,15 +8,30 @@ import './App.css';
 import SelectProfile from './pages/SelectProfile';
 import SeniorIndex from './pages/SeniorIndex';
 import VolunteerIndex from './pages/VolunteerIndex';
+import VolunteerAcceptedRequest from './pages/VolunteerAcceptedRequest'
+import AppContext from './context/AppContext';
+import { defaultLocation } from './config/demoConstants';
+import { getRequests } from './lib/api';
 
 function App() {
+  const [currentLocation, setCurrentLocation] = useState(defaultLocation);
+  const [selectedRequest, setSelectedRequest] = useState({});
+
+  const stateContext = {
+    currentLocation, setCurrentLocation,
+    selectedRequest, setSelectedRequest,
+  }
+
   return (
     <main className="App">
       <Router>
         <Switch>
-          <Route exact path='/' component={SelectProfile} />
-          <Route exact path='/senior' component={SeniorIndex} />
-          <Route exact path='/volunteer' component={VolunteerIndex} />
+          <AppContext.Provider value={stateContext}>
+            <Route exact path='/' component={SelectProfile} />
+            <Route exact path='/senior' component={SeniorIndex} />
+            <Route exact path='/volunteer' component={VolunteerIndex} />
+            <Route exact path='/volunteer/accepted-request' component={VolunteerAcceptedRequest} />
+          </AppContext.Provider>
         </Switch>
       </Router>
     </main>

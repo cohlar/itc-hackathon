@@ -38,7 +38,7 @@ class MapNavigation extends Component {
   }
 
   render() {
-    const { orig, dest } = this.props;
+    const { orig } = this.props;
 
     const GoogleMapNavigation = withGoogleMap(props => (
       <GoogleMap

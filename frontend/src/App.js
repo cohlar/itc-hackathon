@@ -8,7 +8,8 @@ import './App.css';
 import SelectProfile from './pages/SelectProfile';
 import SeniorIndex from './pages/SeniorIndex';
 import VolunteerIndex from './pages/VolunteerIndex';
-import VolunteerAcceptedRequest from './pages/VolunteerAcceptedRequest'
+import VolunteerAcceptedRequest from './pages/VolunteerAcceptedRequest';
+import VolunteerFinished from './pages/VolunteerFinished';
 import AppContext from './context/AppContext';
 import { defaultLocation } from './config/demoConstants';
 
@@ -30,6 +31,7 @@ function App() {
             <Route exact path='/senior' component={SeniorIndex} />
             <Route exact path='/volunteer' component={VolunteerIndex} />
             <Route exact path='/volunteer/accepted-request' component={VolunteerAcceptedRequest} />
+            <Route exact path='/volunteer/finished' component={VolunteerFinished} />
           </AppContext.Provider>
         </Switch>
       </Router>

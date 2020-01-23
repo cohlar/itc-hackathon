@@ -21,9 +21,6 @@ function Request(props) {
                     Needs your help with {request.mis_name}
                 </span>
                 <span>
-                    Phone number: 7 min
-                </span>
-                <span>
                     Phone number: {request.tel}
                 </span>
             </div>

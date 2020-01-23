@@ -11,7 +11,6 @@ const mapStyles = {
 function MapView(props) {
     const { google, initialLocation, requests } = props;
     const appContext = useContext(AppContext);
-    console.log(requests)
 
     return (
         <Map

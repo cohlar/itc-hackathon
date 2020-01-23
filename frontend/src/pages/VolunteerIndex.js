@@ -32,7 +32,7 @@ function VolunteerIndex() {
                     <NavLink
                         to='volunteer/accepted-request'
                         className='validate-container'
-                        onClick={() => handleRequest(appContext.selectedRequest.request_id)}
+                        onClick={() => handleRequest(appContext.selectedRequest.request_id, 10)}
                     >
                         <img
                             src={require('../img/validate.gif')}

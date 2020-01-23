@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import RoundIcon from '../components/RoundIcon';
+import VolunteerProfile from '../components/VolunteerProfile';
 import { helpCategories } from '../config/demoConstants';
-import { addRequest } from '../lib/api';
+import { addRequest, getStatus } from '../lib/api';
 
 function SeniorIndex() {
-    const [selected, setSelected] = useState(false);
+    const [requestId, setRequestId] = useState(null);
     const [matchedVolunteer, setMatchedVolunteer] = useState(null);
 
     useEffect(() => {
         let interval;
-        if (selected && !matchedVolunteer) {
-            interval = setInterval(() => {
-                setMatchedVolunteer(!matchedVolunteer)
+        if (requestId && !matchedVolunteer) {
+            interval = setInterval(async () => {
+                const response = await getStatus(requestId);
+                if (response.status > 0) {
+                    setMatchedVolunteer(response)
+                }
             }, 1000)
         }
         if (matchedVolunteer) {
             clearInterval(interval);
         }
-        console.log(1)
         return () => {
             if (interval) {
                 clearInterval(interval);
             }
         };
-    }, [selected, matchedVolunteer])
+    }, [requestId, matchedVolunteer])
 
     return (
         <div className='flex-row container'>
-            {!selected &&
+            {!requestId &&
                 <>
                     <h1>I want help with...</h1>
                     {helpCategories.map(cat =>
@@ -35,17 +38,17 @@ function SeniorIndex() {
                             key={cat}
                             src={require('../img/help-categories/' + cat + '.png')}
                             alt={cat}
-                            onClick={() => {
-                                addRequest(3, cat, 32.054063, 34.769525);
-                                setSelected(true);
+                            onClick={async () => {
+                                const requestId = await addRequest(3, cat, 32.054063, 34.769525);
+                                setRequestId(requestId);
                             }}
                         />
                     )}
                 </>
             }
 
-            {selected && !matchedVolunteer &&
-                <div style={{textAlign: "center"}}>
+            {requestId && !matchedVolunteer &&
+                <div style={{ textAlign: "center" }}>
                     <img
                         src={require('../img/loader.gif')}
                         alt='Loading...'
@@ -54,10 +57,10 @@ function SeniorIndex() {
                 </div>
             }
 
-            {selected && matchedVolunteer &&
-                <div>
-                    Show volunteer details
-                </div>
+            {requestId && matchedVolunteer &&
+                <VolunteerProfile
+                    volunteer={matchedVolunteer}
+                />
             }
         </div>
     );

@@ -17,9 +17,12 @@ function VolunteerAcceptedRequest() {
             />
             <Request request={appContext.selectedRequest} />
             <NavLink
-                to='volunteer/finished'
+                to='/volunteer/finished'
                 className='validate-container'
-                onClick={() => closeRequest(appContext.selectedRequest.request_id)}
+                onClick={() => {
+                    closeRequest(appContext.selectedRequest.request_id);
+                    appContext.setSelectedRequest(null);
+                }}
             >
                 <img
                     src={require('../img/finish.png')}

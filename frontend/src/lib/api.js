@@ -67,6 +67,6 @@ export async function handleRequest(requestId, volunteerId) {
     }
 }
 
-export async function closeRequest(requestId) {
-    return;
+export function closeRequest(requestId) {
+    console.log('api is closed')
 }

@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+a {
+  color: black;
+}
+
 .flex-col.container {
   height: 100%;
   width: 100%;
@@ -56,7 +60,6 @@ main>div:not(.container)>div {
 }
 
 .select-profile-link>h1 {
-  color: black;
   text-align: center;
 }
 
@@ -69,8 +72,6 @@ main>div:not(.container)>div {
   width: 170px;
   height: 170px;
   object-fit: contain;
-  /* border: 1px solid gray;
-  border-radius: 50%; */
 }
 
 .avatar {
@@ -78,6 +79,7 @@ main>div:not(.container)>div {
   width: 100px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 5px 10px 8px #888888;
 }
 
 .validate-container {
@@ -87,6 +89,10 @@ main>div:not(.container)>div {
 .validate-img {
   height: 50px;
   width: 50px;
+}
+
+.success-img {
+  width: 80%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

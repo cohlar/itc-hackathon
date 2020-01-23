@@ -24,8 +24,6 @@ function VolunteerIndex() {
                 initialLocation={appContext.currentLocation}
                 requests={requests}
             />
-            {/* <div style={{ background: 'red', height: '70%', width: '100%' }}>
-            </div> */}
             {appContext.selectedRequest &&
                 <>
                     <Request request={appContext.selectedRequest} />

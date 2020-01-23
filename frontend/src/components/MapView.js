@@ -9,7 +9,7 @@ const mapStyles = {
 };
 
 function MapView(props) {
-    const { google, initialLocation, requests } = props;
+    const { google, initialLocation, requests = [], volunteer = null } = props;
     const appContext = useContext(AppContext);
 
     return (
@@ -30,7 +30,14 @@ function MapView(props) {
                         position={{ lat: request.lat, lng: request.lon }}
                         key={request.request_id}
                     />
-                )}
+                )
+            }
+
+            {volunteer &&
+                <Marker
+                    position={{ lat: volunteer.lat, lng: volunteer.lng }}
+                />
+            }
 
         </Map>
     );
